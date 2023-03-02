@@ -34,9 +34,9 @@ namespace IbasAPI.Controllers
             {
                 _productionRepo.Add(new DailyProductionDTO
                 {
-                    Date = DateTime.Parse(entity.GetString("RowKey")),
-                    Model = (BikeModel)Int32.Parse(entity.GetString("PartitionKey")),
-                    ItemsProduced = Int32.Parse(entity.GetString("itemsProduced"))
+                    Date = DateTime.Parse(entity.RowKey), 
+                    Model = (BikeModel)Enum.ToObject(typeof(BikeModel), Int32.Parse(entity.PartitionKey)),
+                    ItemsProduced = (int)entity.GetInt32("itemsProduced")!
                 });
             }
         }
